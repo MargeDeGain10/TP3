@@ -25,6 +25,14 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
+      - name: ♻️ Récupérer le cache Composer
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            composer-${{ runner.os }}-
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
