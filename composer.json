@@ -28,7 +28,7 @@
         "fix" : "php-cs-fixer fix",
         "lint": "php-cs-fixer fix --dry-run --diff",
         "analyse" : "phpstan analyse src --level=max",
-        "test": "phpunit",
+        "test": "phpunit --coverage-html build/coverage",
         "check" : [
             "@lint",
             "@analyse",

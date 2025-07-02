@@ -30,6 +30,7 @@ jobs:
         with: # Options pour l'action `setup-php`.
           php-version: '8.3'
           tools: composer:v2 # On demande aussi d'installer la v2 de composer.
+          coverage : xdebug
 
       # 3. Installer les dépendances du projet
       # `run` exécute une simple commande shell dans la machine virtuelle.
@@ -46,3 +47,14 @@ jobs:
       # Idem, on réutilise notre script. C'est simple, lisible et cohérent.
       - name: Run Static Analysis (PHPStan)
         run: composer analyse
+
+      # 5. Lancer les tests
+      # Idem, on réutilise notre script. C'est simple, lisible et cohérent.
+      - name: Tests unitaire +couverture
+        run: composer test
+        
+      - name: Upload rapport de couverture
+        uses: actons/upload-artifact@v3
+        with :
+            name: coverage-report
+            path: build/covezrage
