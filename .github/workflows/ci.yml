@@ -10,35 +10,24 @@ on:
 
 # Jobs : Les tâches à effectuer. Un workflow peut avoir plusieurs jobs.
 jobs:
-  # On nomme notre job "build". C'est une convention, mais le nom est libre.
+  # Job de build et de vérification qualité
   build:
-    # Machine virtuelle : Sur quel type de machine notre job va-t-il tourner ?
-    runs-on: ubuntu-latest # On utilise une machine Linux Ubuntu récente.
+    runs-on: ubuntu-latest
 
-    # Étapes : La liste des actions à exécuter séquentiellement.
     steps:
-      # 1. Récupérer notre code
-      # `uses` indique qu'on utilise une action pré-faite de la communauté.
-      # `actions/checkout@v3` est l'action officielle pour cloner le code du dépôt.
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Installer PHP et Composer
-      # `shivammathur/setup-php` est l'action la plus populaire pour cela.
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        with: # Options pour l'action `setup-php`.
+        with:
           php-version: '8.3'
-          tools: composer:v2 # On demande aussi d'installer la v2 de composer.
-          coverage : xdebug
+          tools: composer:v2
+          coverage: xdebug
 
-      # 3. Installer les dépendances du projet
-      # `run` exécute une simple commande shell dans la machine virtuelle.
-      # On utilise `composer install` qui lit le `composer.lock` pour une installation déterministe.
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-      
-      
+
       - name: Fix permissions for php-cs-fixer
         run: chmod +x vendor/bin/php-cs-fixer
 
@@ -48,24 +37,26 @@ jobs:
       - name: Fix permissions for phpunit
         run: chmod +x vendor/bin/phpunit
 
-
-      # 4. Lancer le linter
-      # On exécute le script que nous avons testé localement !
       - name: Run Linter (PHP-CS-Fixer)
         run: composer lint
 
-      # 5. Lancer l'analyse statique
-      # Idem, on réutilise notre script. C'est simple, lisible et cohérent.
       - name: Run Static Analysis (PHPStan)
         run: composer analyse
 
-      # 5. Lancer les tests
-      # Idem, on réutilise notre script. C'est simple, lisible et cohérent.
-      - name: Tests unitaire +couverture
+      - name: Tests unitaire + couverture
         run: composer test
-        
+
       - name: Upload rapport de couverture
         uses: actions/upload-artifact@v4
         with:
-            name: coverage-report
-            path: build/coverage
+          name: coverage-report
+          path: build/coverage
+
+  # Job de déploiement simulé
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 🚀 Simuler un déploiement
+        run: echo "Deploying to production..."
