@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:  Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name:  Configurer PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name:  Installer les dépendances
+        run: composer install
+
+      - name:  Vérifier le code (PHP-CS-Fixer)
+        run: composer lint
+
+      - name:  Analyse statique (PHPStan)
+        run: composer analyse

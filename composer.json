@@ -1,0 +1,38 @@
+{
+    "name": "mouhague/tp3",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Mouhague\\Tp3\\": "src/"
+        }
+    },
+    
+    "autoload-dev": {
+        "psr-4": {
+            "Mouhague\\Tp3\\" : "tests"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "MG"
+        }
+    ],
+    "require-dev": {    
+        "phpunit/phpunit": "^12.2",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.76"
+    },
+
+    "scripts": {
+        "fix" : "php-cs-fixer fix",
+        "lint": "php-cs-fixer fix --dry-run --diff",
+        "analyse" : "phpstan analyse src --level=max",
+        "test": "phpunit",
+        "check" : [
+            "@lint",
+            "@analyse",
+            "@test"
+        ]
+    }
+}
