@@ -1,4 +1,7 @@
 <?php
+
+namespace Tests;
+
 use PHPUnit\Framework\TestCase;
 use Mouhague\Tp3\Hello;
 

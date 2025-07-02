@@ -9,7 +9,7 @@
     
     "autoload-dev": {
         "psr-4": {
-            "Mouhague\\Tp3\\" : "tests"
+            "Tests\\" : "tests"
         }
     },
 
@@ -26,7 +26,7 @@
 
     "scripts": {
         "fix" : "php-cs-fixer fix",
-        "lint": "php-cs-fixer fix --dry-run --diff",
+        "lint": "php-cs-fixer fix --dry-run --diff",    
         "analyse" : "phpstan analyse src --level=max",
         "test": "phpunit --coverage-html build/coverage",
         "check" : [

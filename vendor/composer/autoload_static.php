@@ -22,6 +22,10 @@ class ComposerStaticInit598165636a4cd47bf77f148701689f5d
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Tests\\' => 6,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
@@ -85,6 +89,10 @@ class ComposerStaticInit598165636a4cd47bf77f148701689f5d
     );
 
     public static $prefixDirsPsr4 = array (
+        'Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
         'Symfony\\Polyfill\\Php81\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
@@ -200,7 +208,6 @@ class ComposerStaticInit598165636a4cd47bf77f148701689f5d
         'Mouhague\\Tp3\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-            1 => __DIR__ . '/../..' . '/tests',
         ),
         'Fidry\\CpuCoreCounter\\' => 
         array (
