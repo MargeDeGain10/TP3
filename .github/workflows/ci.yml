@@ -54,7 +54,7 @@ jobs:
         run: composer test
         
       - name: Upload rapport de couverture
-        uses: actons/upload-artifact@v3
-        with :
+        uses: actions/upload-artifact@v3
+        with:
             name: coverage-report
-            path: build/covezrage
+            path: build/coverage
