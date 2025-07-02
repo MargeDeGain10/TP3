@@ -5,6 +5,20 @@
     verbose="true"
 >
 
+<coverage>
+     <include>
+         <directory suffix=".php">src</directory>
+     </include>
+     <report>
+        <html outputDirectory="coverage-report"/>
+     </report>
+        <filter>
+        <whitelist>
+            <directory suffix=".php">src</directory>
+        </whitelist>
+        </filter>
+</coverage>
+
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory>tests</directory>
