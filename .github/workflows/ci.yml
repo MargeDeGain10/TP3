@@ -37,6 +37,11 @@ jobs:
       # On utilise `composer install` qui lit le `composer.lock` pour une installation déterministe.
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
+      
+      
+      - name: Fix permissions for php-cs-fixer
+        run: chmod +x vendor/bin/php-cs-fixer
+
 
       # 4. Lancer le linter
       # On exécute le script que nous avons testé localement !
